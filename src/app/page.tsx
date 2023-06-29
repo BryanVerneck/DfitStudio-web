@@ -6,13 +6,13 @@ export default function Home() {
 		<>
 			<header className="flex items-center justify-center w-full p-4 border-b-1 border-gray-300">
 				<nav className="flex gap-4">
-					<a href="">DOM</a>
-					<a href="">SEG</a>
-					<a href="">TER</a>
-					<a href="">QUA</a>
-					<a href="">QUI</a>
-					<a href="">SEX</a>
-					<a href="">SAB</a>
+					<a href="" className='hover:text-green-500'>DOM</a>
+					<a href="" className='hover:text-green-500'>SEG</a>
+					<a href="" className='hover:text-green-500'>TER</a>
+					<a href="" className='hover:text-green-500'>QUA</a>
+					<a href="" className='hover:text-green-500'>QUI</a>
+					<a href="" className='hover:text-green-500'>SEX</a>
+					<a href="" className='hover:text-green-500'>SAB</a>
 				</nav>
 			</header>
 
