@@ -4,15 +4,15 @@ import ClassDetails from '@/components/classDetails';
 export default function Home() {
 	return (
 		<>
-			<header className="flex items-center justify-center w-full p-4 border-b-1 border-gray-300">
-				<nav className="flex gap-4">
-					<a href="">DOM</a>
-					<a href="">SEG</a>
-					<a href="">TER</a>
-					<a href="">QUA</a>
-					<a href="">QUI</a>
-					<a href="">SEX</a>
-					<a href="">SAB</a>
+			<header className="flex items-center justify-center w-full border-b-1 h-12 border-gray-300">
+				<nav className="flex gap-4 h-full items-center justify-center">
+					<a href="" className='hover:text-green-400'>DOM</a>
+					<a href="" className='hover:text-green-400'>SEG</a>
+					<a href="" className='hover:text-green-400'>TER</a>
+					<a href="" className='hover:text-green-400'>QUA</a>
+					<a href="" className='hover:text-green-400'>QUI</a>
+					<a href="" className='hover:text-green-400'>SEX</a>
+					<a href="" className='hover:text-green-400'>SAB</a>
 				</nav>
 			</header>
 

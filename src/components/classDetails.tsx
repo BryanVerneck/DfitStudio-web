@@ -3,9 +3,9 @@ import StudentsList from './studentsList';
 export default function ClassDetails() {
 	return(
 		<div className="">
-			<div className="flex text-xl w-full items-center justify-center">
-				<h2 className="border-r-2 px-3">06:00 - 07:00</h2>
-				<h2 className="px-3">8 alunos</h2>
+			<div className="flex text-xl w-full items-center justify-center gap-12">
+				<h2 className="">06:00 - 07:00</h2>
+				<h2 className="">8 alunos</h2>
 			</div>
 
 			<div className="flex m-4 gap-1 items-center justify-center">

@@ -6,10 +6,10 @@ export default function StudentsList(){
 			<p>Bryan Verneck</p>
 			<div className="flex gap-2">
 				<button className="border-1 p-1 px-2 rounded">
-					<PencilSquareIcon className="h-6 w-6 text-blue-500"/>
+					<PencilSquareIcon className="h-5 w-5 text-blue-500"/>
 				</button>
 				<button className="border-1 p-1 px-2 rounded">
-					<TrashIcon className="h-6 w-6 text-red-500"/>
+					<TrashIcon className="h-5 w-5 text-red-500"/>
 				</button>
 			</div>
 		</div>
