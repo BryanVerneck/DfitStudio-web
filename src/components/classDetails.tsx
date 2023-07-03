@@ -1,8 +1,15 @@
 import StudentsList from './studentsList';
+import { Students } from '@/types/Students';
+import { TrainingClasses } from '@/types/trainingClasses';
 
-export default function ClassDetails() {
+interface ClassDetailProps {
+  student: Students;
+  trainingClass: TrainingClasses;
+}
+
+export default function ClassDetails({ student, trainingClass } : ClassDetailProps) {
 	return(
-		<div className="">
+		<div className="m-5 w-80">
 			<div className="flex text-xl w-full items-center justify-center">
 				<h2 className="border-r-2 px-3">06:00 - 07:00</h2>
 				<h2 className="px-3">8 alunos</h2>

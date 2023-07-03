@@ -1,37 +1,53 @@
-import ClassHour from '@/components/class';
+'use client';
+import ClassHour from '@/components/classHour';
 import ClassDetails from '@/components/classDetails';
+import Header from '@/components/header';
+import { TrainingClasses } from '@/types/trainingClasses';
+import { api } from '@/utils/api';
+import { useEffect, useState } from 'react';
+import { Students } from '@/types/Students';
 
 export default function Home() {
+
+	const [ weekDateSelected, setWeekDateSelected ] = useState('SEGUNDA');
+	const [ trainingClasses, setTrainingClasses ] = useState<TrainingClasses[]>([]);
+	const [ students, setStudents ] = useState<Students[]>([]);
+	const [ isLoading, setIsLoading ] = useState(true);
+
+	function handleWeekDateSelected(weekDate: string){
+		setWeekDateSelected(weekDate);
+	}
+
+	useEffect(() => {
+		Promise.all([
+			api.get('/trainingClasses'),
+			api.get('/students'),
+		]).then(([trainingClassResponse, studentsResponse]) => {
+			setTrainingClasses(trainingClassResponse.data);
+			setStudents(studentsResponse.data);
+			setIsLoading(false);
+		});
+	}, []);
+
 	return (
 		<>
-			<header className="flex items-center justify-center w-full p-4 border-b-1 border-gray-300">
-				<nav className="flex gap-4">
-					<a href="" className='hover:text-green-500'>DOM</a>
-					<a href="" className='hover:text-green-500'>SEG</a>
-					<a href="" className='hover:text-green-500'>TER</a>
-					<a href="" className='hover:text-green-500'>QUA</a>
-					<a href="" className='hover:text-green-500'>QUI</a>
-					<a href="" className='hover:text-green-500'>SEX</a>
-					<a href="" className='hover:text-green-500'>SAB</a>
-				</nav>
-			</header>
+			<Header weekDateSelected={weekDateSelected} onWeekSelected={handleWeekDateSelected}/>
 
 			<main className="flex flex-col w-full items-center justify-center">
 				<div className="grid grid-cols-4 gap-2 items-center justify-center border-b-1 py-4">
-					<ClassHour hour="06:00" studentsQuantity={8}/>
-					<ClassHour hour="07:00" studentsQuantity={5}/>
-					<ClassHour hour="08:00" studentsQuantity={4}/>
-					<ClassHour hour="09:00" studentsQuantity={6}/>
-					<ClassHour hour="10:00" studentsQuantity={2}/>
-					<ClassHour hour="11:00" studentsQuantity={3}/>
-					<ClassHour hour="18:00" studentsQuantity={5}/>
-					<ClassHour hour="19:00" studentsQuantity={7}/>
-					<ClassHour hour="20:00" studentsQuantity={8}/>
+					{trainingClasses.map(trainingClass => {
+						if(trainingClass.weekDate != weekDateSelected){
+							return <></>;
+						}
+
+						return(
+							<ClassHour key={trainingClass._id} hour={trainingClass.classHour} studentsQuantity={trainingClass.students.length}/>
+						);
+					})}
+
 				</div>
 
-				<div className="m-5 w-80">
-					<ClassDetails/>
-				</div>
+				<ClassDetails />
 
 			</main>
 
