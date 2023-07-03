@@ -2,7 +2,7 @@
 import ClassHour from '@/components/classHour';
 import ClassDetails from '@/components/classDetails';
 import Header from '@/components/header';
-import { TrainingClasses } from '@/types/trainingClasses';
+import { TrainingClasses } from '@/types/TrainingClasses';
 import { api } from '@/utils/api';
 import { useEffect, useState } from 'react';
 import { Students } from '@/types/Students';

@@ -1,13 +1,13 @@
 import StudentsList from './studentsList';
 import { Students } from '@/types/Students';
-import { TrainingClasses } from '@/types/trainingClasses';
+import { TrainingClasses } from '@/types/TrainingClasses';
 
 interface ClassDetailProps {
   student: Students;
   trainingClass: TrainingClasses;
 }
 
-export default function ClassDetails({ student, trainingClass } : ClassDetailProps) {
+export default function ClassDetails() {
 	return(
 		<div className="m-5 w-80">
 			<div className="flex text-xl w-full items-center justify-center">
