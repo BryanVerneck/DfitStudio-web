@@ -6,6 +6,7 @@ export interface TrainingClasses {
   students: {
     _id: string;
     student: {
+      _id: string;
       name: string;
       classesPerWeek: number;
     }

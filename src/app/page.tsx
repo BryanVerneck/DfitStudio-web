@@ -8,23 +8,25 @@ import { useEffect, useState } from 'react';
 import { Students } from '@/types/Students';
 
 export default function Home() {
-
 	const [ weekDateSelected, setWeekDateSelected ] = useState('SEGUNDA');
+	const [ selectedClassHour, setSelectedClassHour ] = useState<TrainingClasses | null>();
 	const [ trainingClasses, setTrainingClasses ] = useState<TrainingClasses[]>([]);
-	const [ students, setStudents ] = useState<Students[]>([]);
 	const [ isLoading, setIsLoading ] = useState(true);
 
 	function handleWeekDateSelected(weekDate: string){
 		setWeekDateSelected(weekDate);
+		setSelectedClassHour(null);
+	}
+
+	function handleSelectedClassHour(trainingClass: TrainingClasses){
+		setSelectedClassHour(trainingClass);
 	}
 
 	useEffect(() => {
 		Promise.all([
 			api.get('/trainingClasses'),
-			api.get('/students'),
-		]).then(([trainingClassResponse, studentsResponse]) => {
+		]).then(([trainingClassResponse]) => {
 			setTrainingClasses(trainingClassResponse.data);
-			setStudents(studentsResponse.data);
 			setIsLoading(false);
 		});
 	}, []);
@@ -36,18 +38,20 @@ export default function Home() {
 			<main className="flex flex-col w-full items-center justify-center">
 				<div className="grid grid-cols-4 gap-2 items-center justify-center border-b-1 py-4">
 					{trainingClasses.map(trainingClass => {
-						if(trainingClass.weekDate != weekDateSelected){
-							return <></>;
-						}
+						if(trainingClass.weekDate != weekDateSelected) return <></>;
 
 						return(
-							<ClassHour key={trainingClass._id} hour={trainingClass.classHour} studentsQuantity={trainingClass.students.length}/>
+							<ClassHour
+								key={trainingClass._id}
+								trainingClass={trainingClass}
+								onClassHourSelected={handleSelectedClassHour}
+							/>
 						);
 					})}
 
 				</div>
 
-				<ClassDetails />
+				<ClassDetails selectedClassHour={selectedClassHour}/>
 
 			</main>
 

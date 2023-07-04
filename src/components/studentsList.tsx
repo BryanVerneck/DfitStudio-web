@@ -1,9 +1,14 @@
+import { Students } from '@/types/Students';
 import { TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 
-export default function StudentsList(){
+interface StudentListProps {
+  student: Students;
+}
+
+export default function StudentsList({ student } : StudentListProps){
 	return(
 		<div className="flex justify-between items-center mb-3">
-			<p>Bryan Verneck</p>
+			<p>{student.name}</p>
 			<div className="flex gap-2">
 				<button className="border-1 p-1 px-2 rounded">
 					<PencilSquareIcon className="h-5 w-5 text-blue-500"/>
