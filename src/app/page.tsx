@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 
 export default function Home() {
 	const router = useRouter();
-	const user = JSON.parse(localStorage.getItem('user')!);
 
 	const [ weekDateSelected, setWeekDateSelected ] = useState('SEGUNDA');
 	const [ selectedClassHour, setSelectedClassHour ] = useState<TrainingClasses | null>();
@@ -17,6 +16,7 @@ export default function Home() {
 	const [ isLoading, setIsLoading ] = useState(true);
 
 	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem('user')!);
 		if(!user){
 			router.push('/signIn');
 		}
