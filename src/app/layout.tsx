@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
 	title: 'Dfit Studio',
-	description: 'Dfit studio for managing classes',
+	description: 'Dfit studio for managing training classes',
 };
 
 export default function RootLayout({
