@@ -12,16 +12,16 @@ interface ClassDetailProps {
 
 export default function ClassDetails({ selectedClassHour, onStudentListUpdate, onSelectedClassHourUpdate } : ClassDetailProps) {
 
-	let user: Students;
+	const [ user, setUser ] = useState<Students>();
 	const [ userInClass, setUserInClass ] = useState(false);
 
 	useEffect(() => {
-		user = JSON.parse(localStorage.getItem('user')!);
+		setUser(JSON.parse(localStorage.getItem('user')!));
 	}, []);
 
 	function handleUserInClass(){
 		selectedClassHour?.students.some((student) => {
-			if (student.student._id === user._id) {
+			if (student.student._id === user?._id) {
 				setUserInClass(true);
 				return true; // Encerra a iteração assim que encontrar o primeiro valor true
 			} else {
@@ -39,7 +39,7 @@ export default function ClassDetails({ selectedClassHour, onStudentListUpdate, o
 
 	async function handleAddStudent(){
 		await api.put(`/addStudentToClass/${selectedClassHour?._id}`, {
-			student: user._id
+			student: user!._id
 		}).then(() => {
 			onStudentListUpdate();
 			getTrainingClassById();
@@ -48,7 +48,7 @@ export default function ClassDetails({ selectedClassHour, onStudentListUpdate, o
 
 	async function handleRemoveStudent(){
 		await api.put(`/removeStudentFromClass/${selectedClassHour?._id}`, {
-			student: user._id
+			student: user!._id
 		}).then(() => {
 			onStudentListUpdate();
 			getTrainingClassById();

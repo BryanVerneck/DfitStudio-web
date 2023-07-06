@@ -13,7 +13,6 @@ export default function Home() {
 	const [ weekDateSelected, setWeekDateSelected ] = useState('SEGUNDA');
 	const [ selectedClassHour, setSelectedClassHour ] = useState<TrainingClasses | null>();
 	const [ trainingClasses, setTrainingClasses ] = useState<TrainingClasses[]>([]);
-	const [ isLoading, setIsLoading ] = useState(true);
 
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem('user')!);
