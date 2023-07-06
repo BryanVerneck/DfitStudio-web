@@ -20,13 +20,14 @@ export default function Home() {
 		if(!user){
 			router.push('/signIn');
 		}
-		Promise.all([
-			api.get('/trainingClasses'),
-		]).then(([trainingClassResponse]) => {
-			setTrainingClasses(trainingClassResponse.data);
-			setIsLoading(false);
-		});
+		handleGetTrainingClasses();
 	}, []);
+
+	async function handleGetTrainingClasses(){
+		await api.get('/trainingClasses').then((response) => {
+			setTrainingClasses(response.data);
+		});
+	}
 
 	function handleWeekDateSelected(weekDate: string){
 		setWeekDateSelected(weekDate);
@@ -57,7 +58,11 @@ export default function Home() {
 
 				</div>
 
-				<ClassDetails selectedClassHour={selectedClassHour}/>
+				<ClassDetails
+					selectedClassHour={selectedClassHour}
+					onStudentListUpdate={handleGetTrainingClasses}
+					onSelectedClassHourUpdate={handleSelectedClassHour}
+				/>
 
 			</main>
 

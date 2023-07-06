@@ -6,20 +6,18 @@ interface StudentListProps {
 }
 
 export default function StudentsList({ student } : StudentListProps){
-	const user = JSON.parse(localStorage.getItem('user')!);
-
 	return(
-		<div className="flex justify-between items-center mb-3">
+		<div className="flex justify-center items-center mb-3">
 			<p>{student.name}</p>
 			<div className="flex gap-2">
 				{/* <button className="border-1 p-1 px-2 rounded">
 					<PencilSquareIcon className="h-5 w-5 text-blue-500"/>
 				</button> */}
-				{student.name == user.name && (
+				{/* {student.name == user.name && (
 					<button className="border-1 p-1 px-2 rounded">
 						<ArrowRightOnRectangleIcon className="h-5 w-5 text-red-500"/>
 					</button>
-				)}
+				)} */}
 			</div>
 		</div>
 	);
