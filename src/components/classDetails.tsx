@@ -12,8 +12,12 @@ interface ClassDetailProps {
 
 export default function ClassDetails({ selectedClassHour, onStudentListUpdate, onSelectedClassHourUpdate } : ClassDetailProps) {
 
-	const user: Students = JSON.parse(localStorage.getItem('user')!);
+	let user: Students;
 	const [ userInClass, setUserInClass ] = useState(false);
+
+	useEffect(() => {
+		user = JSON.parse(localStorage.getItem('user')!);
+	}, []);
 
 	function handleUserInClass(){
 		selectedClassHour?.students.some((student) => {
