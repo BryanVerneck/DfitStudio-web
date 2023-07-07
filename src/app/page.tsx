@@ -6,12 +6,13 @@ import { TrainingClasses } from '@/types/TrainingClasses';
 import { api } from '@/utils/api';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import WeekDateMenu from '@/components/weekDateMenu';
 
 export default function Home() {
 	const router = useRouter();
 
-	const [ weekDateSelected, setWeekDateSelected ] = useState('SEGUNDA');
-	const [ selectedClassHour, setSelectedClassHour ] = useState<TrainingClasses | null>();
+	const [ weekDateSelected, setWeekDateSelected ] = useState('Segunda-feira');
+	const [ selectedClassHour, setSelectedClassHour ] = useState<TrainingClasses | null>(null);
 	const [ trainingClasses, setTrainingClasses ] = useState<TrainingClasses[]>([]);
 
 	useEffect(() => {
@@ -34,15 +35,20 @@ export default function Home() {
 	}
 
 	function handleSelectedClassHour(trainingClass: TrainingClasses){
-		setSelectedClassHour(trainingClass);
+		api.get(`/getTrainingClassById/${trainingClass._id}`).then((response) => {
+			setSelectedClassHour(response.data);
+			handleGetTrainingClasses();
+		});
 	}
 
 	return (
 		<>
-			<Header weekDateSelected={weekDateSelected} onWeekSelected={handleWeekDateSelected}/>
+			<Header/>
 
 			<main className="flex flex-col w-full items-center justify-center">
-				<div className="grid grid-cols-4 gap-1 items-center justify-center border-b-1 py-4">
+				<WeekDateMenu weekDateSelected={weekDateSelected} onWeekSelected={handleWeekDateSelected}/>
+
+				<div className="grid grid-cols-4 gap-1 justify-center border-b-1 pb-3 px-3 mt-2">
 					{trainingClasses.map(trainingClass => {
 						if(trainingClass.weekDate != weekDateSelected) return null;
 

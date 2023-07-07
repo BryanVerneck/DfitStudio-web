@@ -1,3 +1,5 @@
+import { Students } from './Students';
+
 export interface TrainingClasses {
   _id: string;
   weekDate: string;
@@ -5,10 +7,6 @@ export interface TrainingClasses {
   trainingType: string,
   students: {
     _id: string;
-    student: {
-      _id: string;
-      name: string;
-      classesPerWeek: number;
-    }
+    student: Students
   }[]
 }

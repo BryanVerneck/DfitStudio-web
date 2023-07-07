@@ -7,7 +7,7 @@ interface StudentListProps {
 export default function StudentsList({ student } : StudentListProps){
 	return(
 		<div className="flex justify-center items-center mb-3">
-			<p>{student.name}</p>
+			<p>{student?.name}</p>
 		</div>
 	);
 }
