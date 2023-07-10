@@ -25,7 +25,7 @@ export default function WeekDateMenu({ weekDateSelected, onWeekSelected }: WeekD
 							key={index}
 							onClick={() => onWeekSelected(weekDate.id)}
 							className={`${weekDateSelected === weekDate.id &&
-                'text-blue-400'
+                'text-pink-600'
 							}`}
 						>
 							{weekDate.label}
