@@ -7,6 +7,7 @@ import { api } from '@/utils/api';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import WeekDateMenu from '@/components/weekDateMenu';
+import { GridLoader } from 'react-spinners';
 
 export default function Home() {
 	const router = useRouter();
@@ -14,6 +15,7 @@ export default function Home() {
 	const [ weekDateSelected, setWeekDateSelected ] = useState('Segunda-feira');
 	const [ selectedClassHour, setSelectedClassHour ] = useState<TrainingClasses | null>(null);
 	const [ trainingClasses, setTrainingClasses ] = useState<TrainingClasses[]>([]);
+	const [ loading, setLoading ] = useState(false);
 
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem('user')!);
@@ -34,11 +36,13 @@ export default function Home() {
 		setSelectedClassHour(null);
 	}
 
-	function handleSelectedClassHour(trainingClass: TrainingClasses){
-		api.get(`/getTrainingClassById/${trainingClass._id}`).then((response) => {
+	async function handleSelectedClassHour(trainingClass: TrainingClasses){
+		setLoading(true);
+		await api.get(`/getTrainingClassById/${trainingClass._id}`).then((response) => {
 			setSelectedClassHour(response.data);
 			handleGetTrainingClasses();
 		});
+		setLoading(false);
 	}
 
 	return (
@@ -63,11 +67,25 @@ export default function Home() {
 
 				</div>
 
-				<ClassDetails
-					selectedClassHour={selectedClassHour}
-					onStudentListUpdate={handleGetTrainingClasses}
-					onSelectedClassHourUpdate={handleSelectedClassHour}
-				/>
+				{!loading ?
+					<ClassDetails
+						selectedClassHour={selectedClassHour}
+						onStudentListUpdate={handleGetTrainingClasses}
+						onSelectedClassHourUpdate={handleSelectedClassHour}
+					/>
+					:
+					<div className='mt-14'>
+						<GridLoader
+							color={'pink'}
+							loading={loading}
+							// cssOverride={override}
+							size={10}
+							aria-label="Loading Spinner"
+							data-testid="loader"
+						/>
+					</div>
+
+				}
 
 			</main>
 

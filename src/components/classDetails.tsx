@@ -73,7 +73,7 @@ export default function ClassDetails({ selectedClassHour, onStudentListUpdate, o
 		<>
 			{!selectedClassHour && <div className='m-8'>Selecione seu horário</div>}
 
-			{selectedClassHour && (
+			{selectedClassHour && user && (
 				<div className="mt-5 w-80">
 					<div className="flex text-xl items-center justify-center">
 						<h2 className="">{selectedClassHour?.classHour}, {selectedClassHour?.weekDate}</h2>
@@ -90,7 +90,7 @@ export default function ClassDetails({ selectedClassHour, onStudentListUpdate, o
 								onClick={handleAddStudent}
 								disabled={
 									(user!.trainingClasses.length >= user!.classesPerWeek) ||
-                  (selectedClassHour.students.length >= 8)
+									(selectedClassHour.students.length >= 8)
 								}
 							>
                 Entrar na aula
