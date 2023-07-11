@@ -3,14 +3,24 @@ import StudentsList from './studentsList';
 import { TrainingClasses } from '@/types/TrainingClasses';
 import { api } from '@/utils/api';
 import { Students } from '@/types/Students';
+import { notifyYellow } from './notification';
 
 interface ClassDetailProps {
   selectedClassHour? : null | TrainingClasses;
   onStudentListUpdate: () => void;
   onSelectedClassHourUpdate: (trainingClass : TrainingClasses) => void;
+  notifyGreen: (message: string) => void;
+  notifyRed: (message: string) => void;
+  loading: (messageStatus: boolean) => void;
 }
 
-export default function ClassDetails({ selectedClassHour, onStudentListUpdate, onSelectedClassHourUpdate } : ClassDetailProps) {
+export default function ClassDetails({
+	selectedClassHour,
+	onStudentListUpdate,
+	onSelectedClassHourUpdate,
+	notifyGreen,
+	notifyRed,
+	loading } : ClassDetailProps) {
 
 	const [ user, setUser ] = useState<Students>();
 	const [ userInClass, setUserInClass ] = useState(false);
@@ -18,6 +28,10 @@ export default function ClassDetails({ selectedClassHour, onStudentListUpdate, o
 	useEffect(() => {
 		setUser(JSON.parse(localStorage.getItem('user')!));
 	}, []);
+
+	useEffect(() => {
+		handleUserInClass();
+	}, [user]);
 
 	function handleUserInClass(){
 		// caso não exista estudantes na lista retorna false
@@ -44,30 +58,38 @@ export default function ClassDetails({ selectedClassHour, onStudentListUpdate, o
 	}
 
 	async function handleAddStudent(){
+		if((user!.trainingClasses.length >= user!.classesPerWeek)){
+			return notifyRed('Você atingiu o seu limite de aulas.');
+		} else if((selectedClassHour!.students.length >= 8)) {
+			return notifyRed('Esta aula esta cheia.');
+		}
+
+		loading(true);
 		await api.put(`/addStudentToClass/${selectedClassHour?._id}`, {
 			student: user!._id
 		}).then((response) => {
+			onStudentListUpdate();
+			onSelectedClassHourUpdate(selectedClassHour!);
 			setUser(response.data);
 			localStorage.setItem('user', JSON.stringify(response.data));
-			onStudentListUpdate();
-			getTrainingClassById();
+			// getTrainingClassById();
+			notifyGreen('Você foi adicionado(a) na aula.');
 		});
 	}
 
 	async function handleRemoveStudent(){
+		loading(true);
 		await api.put(`/removeStudentFromClass/${selectedClassHour?._id}`, {
 			student: user!._id
 		}).then((response) => {
+			onStudentListUpdate();
+			onSelectedClassHourUpdate(selectedClassHour!);
 			setUser(response.data);
 			localStorage.setItem('user', JSON.stringify(response.data));
-			onStudentListUpdate();
-			getTrainingClassById();
+			// getTrainingClassById();
+			notifyYellow('Você foi removido(a) da aula.');
 		});
 	}
-
-	useEffect(() => {
-		handleUserInClass();
-	}, [selectedClassHour]);
 
 	return(
 		<>
@@ -88,10 +110,6 @@ export default function ClassDetails({ selectedClassHour, onStudentListUpdate, o
 						{!userInClass ?
 							<button className="border-1 rounded px-2 py-1"
 								onClick={handleAddStudent}
-								disabled={
-									(user!.trainingClasses.length >= user!.classesPerWeek) ||
-									(selectedClassHour.students.length >= 8)
-								}
 							>
                 Entrar na aula
 							</button>

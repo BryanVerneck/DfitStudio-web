@@ -8,7 +8,7 @@ interface ClassHourProps {
 export default function ClassHour({ trainingClass, onClassHourSelected } : ClassHourProps) {
 	return(
 		<button
-			className="border-1 px-2 py-1 hover:cursor-pointer hover:bg-blue-400 text-center rounded"
+			className="border-1 px-2 py-1 hover:cursor-pointer hover:bg-pink-600 text-center rounded"
 			onClick={() => onClassHourSelected(trainingClass)}
 		>
 			{trainingClass.classHour}

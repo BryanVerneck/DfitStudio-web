@@ -9,6 +9,10 @@ import { useRouter } from 'next/navigation';
 import WeekDateMenu from '@/components/weekDateMenu';
 import { GridLoader } from 'react-spinners';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { notifyGreen, notifyRed } from '@/components/notification';
+
 export default function Home() {
 	const router = useRouter();
 
@@ -40,9 +44,13 @@ export default function Home() {
 		setLoading(true);
 		await api.get(`/getTrainingClassById/${trainingClass._id}`).then((response) => {
 			setSelectedClassHour(response.data);
-			handleGetTrainingClasses();
+			// handleGetTrainingClasses();
 		});
 		setLoading(false);
+	}
+
+	function handleLoading(loadingStatus: boolean){
+		setLoading(loadingStatus);
 	}
 
 	return (
@@ -72,11 +80,14 @@ export default function Home() {
 						selectedClassHour={selectedClassHour}
 						onStudentListUpdate={handleGetTrainingClasses}
 						onSelectedClassHourUpdate={handleSelectedClassHour}
+						notifyGreen={notifyGreen}
+						notifyRed={notifyRed}
+						loading={handleLoading}
 					/>
 					:
 					<div className='mt-14'>
 						<GridLoader
-							color={'pink'}
+							color={'#BE185D'}
 							loading={loading}
 							// cssOverride={override}
 							size={10}
@@ -84,9 +95,9 @@ export default function Home() {
 							data-testid="loader"
 						/>
 					</div>
-
 				}
 
+				<ToastContainer limit={2}/>
 			</main>
 
 		</>
