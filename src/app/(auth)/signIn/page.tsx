@@ -28,8 +28,8 @@ export default function SignUp() {
 					<h1>Bem vindo(a)!</h1>
 					<input type="text" placeholder="Nome e sobrenome"
 						className={`${signInFailed ?
-							'border-1 border-red-500 py-1 px-2 rounded' :
-							'border-1 py-1 px-2 rounded'
+							'border-1 border-red-500 py-1 px-2 rounded text-black' :
+							'border-1 py-1 px-2 rounded text-black'
 						}`}
 						onChange={(e) => setName((e.target.value).toLowerCase())}
 					/>

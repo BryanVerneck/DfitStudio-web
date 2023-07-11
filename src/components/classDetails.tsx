@@ -102,21 +102,21 @@ export default function ClassDetails({
 					</div>
 
 					<div className="flex text-xs items-center justify-center mt-1">
-						<div className='border-r-2 px-3'>{selectedClassHour.trainingType}</div>
+						<div className='border-r-2 border-zinc-700 px-3'>{selectedClassHour.trainingType}</div>
 						<h2 className="px-3">{selectedClassHour?.students.length} alunos</h2>
 					</div>
 
 					<div className="flex my-3 gap-1 items-center justify-center mt-5 ">
 						{!userInClass ?
 							<button
-								className="border-1 text-green-600 rounded px-2 py-1 hover:bg-pink-700 hover:text-white"
+								className="border-1 border-zinc-700 text-green-600 rounded px-2 py-1 hover:bg-pink-700 hover:text-white"
 								onClick={handleAddStudent}
 							>
                 Entrar na aula
 							</button>
 							:
 							<button
-								className="border-1 text-red-600 rounded px-2 py-1 hover:bg-pink-700 hover:text-white"
+								className="border-1 border-zinc-700 text-red-600 rounded px-2 py-1 hover:bg-pink-700 hover:text-white"
 								onClick={handleRemoveStudent}>
                 Sair da aula
 							</button>

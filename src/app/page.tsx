@@ -9,8 +9,8 @@ import { useRouter } from 'next/navigation';
 import WeekDateMenu from '@/components/weekDateMenu';
 import { GridLoader } from 'react-spinners';
 
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import { notifyGreen, notifyRed } from '@/components/notification';
 
 export default function Home() {
@@ -60,7 +60,7 @@ export default function Home() {
 			<main className="flex flex-col w-full items-center justify-center">
 				<WeekDateMenu weekDateSelected={weekDateSelected} onWeekSelected={handleWeekDateSelected}/>
 
-				<div className="grid grid-cols-4 gap-1 justify-center border-b-1 pb-5 px-3 mt-2">
+				<div className="grid grid-cols-4 gap-1 justify-center border-b-1 border-zinc-700 pb-5 px-3 mt-2">
 					{trainingClasses.map(trainingClass => {
 						if(trainingClass.weekDate != weekDateSelected) return null;
 

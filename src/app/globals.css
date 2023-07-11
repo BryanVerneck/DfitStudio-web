@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+
 body {
-  background-color: black;
+  background-color: rgb(25, 25, 25);
   color: white;
-} */
+}

@@ -42,21 +42,24 @@ export default function SignUp(){
 					<input
 						type="text"
 						placeholder="Nome"
-						className={signUpFailed ? 'border-1 border-red-500 py-1 px-2 rounded' : 'border-1 py-1 px-2 rounded'}
+						className={signUpFailed ?
+							'border-1 border-red-500 py-1 px-2 rounded text-black' :
+							'border-1 py-1 px-2 rounded text-black'}
 						onChange={(e) => setName(e.target.value)}
 					/>
 					<input
 						type="text"
 						placeholder="Sobrenome"
-						className={signUpFailed ? 'border-1 border-red-500 py-1 px-2 rounded' : 'border-1 py-1 px-2 rounded'}
+						className={signUpFailed ?
+							'border-1 border-red-500 py-1 px-2 rounded text-black' :
+							'border-1 py-1 px-2 rounded text-black'}
 						onChange={(e) => setLastName(e.target.value)}
 					/>
-
 					<select
 						value={classesPerWeek}
 						name="NumberOfClasses"
 						id="NumberOfClasses"
-						className='border-1 p-1 rounded'
+						className='border-1 p-1 rounded text-black'
 						onChange={(e) => setClassesPerWeek(Number(e.target.value))}
 					>
 						<option value={0} disabled>
@@ -69,9 +72,10 @@ export default function SignUp(){
 						<option value={5}>5</option>
 					</select>
 
-					{signUpFailed ? <p className='flex justify-center text-red-500'>
+					{signUpFailed ?
+						<p className='flex justify-center text-red-500'>
             Nome já cadastrado.
-					</p> : <></>}
+						</p> : <></>}
 
 					<div className="w-full flex justify-end">
 						<button
