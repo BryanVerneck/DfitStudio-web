@@ -60,7 +60,7 @@ export default function Home() {
 			<main className="flex flex-col w-full items-center justify-center">
 				<WeekDateMenu weekDateSelected={weekDateSelected} onWeekSelected={handleWeekDateSelected}/>
 
-				<div className="grid grid-cols-4 gap-1 justify-center border-b-1 pb-3 px-3 mt-2">
+				<div className="grid grid-cols-4 gap-1 justify-center border-b-1 pb-5 px-3 mt-2">
 					{trainingClasses.map(trainingClass => {
 						if(trainingClass.weekDate != weekDateSelected) return null;
 

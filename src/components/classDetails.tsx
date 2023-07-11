@@ -73,7 +73,7 @@ export default function ClassDetails({
 			setUser(response.data);
 			localStorage.setItem('user', JSON.stringify(response.data));
 			// getTrainingClassById();
-			notifyGreen('Você foi adicionado(a) na aula.');
+			notifyGreen('Você foi adicionado(a) em uma aula.');
 		});
 	}
 
@@ -87,7 +87,7 @@ export default function ClassDetails({
 			setUser(response.data);
 			localStorage.setItem('user', JSON.stringify(response.data));
 			// getTrainingClassById();
-			notifyYellow('Você foi removido(a) da aula.');
+			notifyYellow('Você foi removido(a) desta aula.');
 		});
 	}
 
@@ -106,15 +106,18 @@ export default function ClassDetails({
 						<h2 className="px-3">{selectedClassHour?.students.length} alunos</h2>
 					</div>
 
-					<div className="flex my-3 gap-1 items-center justify-center mt-5">
+					<div className="flex my-3 gap-1 items-center justify-center mt-5 ">
 						{!userInClass ?
-							<button className="border-1 rounded px-2 py-1"
+							<button
+								className="border-1 text-green-600 rounded px-2 py-1 hover:bg-pink-700 hover:text-white"
 								onClick={handleAddStudent}
 							>
                 Entrar na aula
 							</button>
 							:
-							<button className="border-1 text-red-500 rounded px-2 py-1" onClick={handleRemoveStudent}>
+							<button
+								className="border-1 text-red-600 rounded px-2 py-1 hover:bg-pink-700 hover:text-white"
+								onClick={handleRemoveStudent}>
                 Sair da aula
 							</button>
 						}

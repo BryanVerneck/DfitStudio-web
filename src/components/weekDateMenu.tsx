@@ -18,14 +18,14 @@ export default function WeekDateMenu({ weekDateSelected, onWeekSelected }: WeekD
 		<header
 			className="flex items-center justify-center w-full py-2 mt-2"
 		>
-			<nav className="flex gap-3">
+			<nav className="flex gap-3 font-semibold">
 				{weekDates.map((weekDate, index) => {
 					return(
 						<button
 							key={index}
 							onClick={() => onWeekSelected(weekDate.id)}
 							className={`${weekDateSelected === weekDate.id &&
-                'text-pink-600'
+                'text-pink-700'
 							}`}
 						>
 							{weekDate.label}
