@@ -31,7 +31,7 @@ export default function SignUp() {
 							'border-1 border-red-500 py-1 px-2 rounded' :
 							'border-1 py-1 px-2 rounded'
 						}`}
-						onChange={(e) => setName(e.target.value)}
+						onChange={(e) => setName((e.target.value).toLowerCase())}
 					/>
 					{signInFailed ?
 						<p className='text-red-500 w-44'>
