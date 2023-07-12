@@ -9,6 +9,7 @@ export default function SignUp() {
 
 	const [name, setName] = useState('');
 	const [signInFailed, setSignInFailed] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	function handleSignIn() {
 		api.get(`/getStudentByName/${name}`).then((response) => {
@@ -48,15 +49,15 @@ export default function SignUp() {
 							disabled={!name}
 							onClick={handleSignIn}
 						>
-              Entrar
+							Entrar
 						</button>
 					</div>
-					<a
+					<button
 						className='underline cursor-pointer mt-4'
 						onClick={() => router.push('/signUp')}
 					>
             Criar uma conta
-					</a>
+					</button>
 				</div>
 			</main>
 		</>
