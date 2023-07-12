@@ -25,7 +25,7 @@ export default function SignUp() {
 		<>
 			<main className="flex justify-center py-20 h-screen">
 				<div className="flex flex-col w-fit gap-3 items-center">
-					<h1>Bem vindo(a)!</h1>
+					<h1 className='text-lg'>Bem vindo(a)!</h1>
 					<input type="text" placeholder="Nome e sobrenome"
 						className={`${signInFailed ?
 							'border-1 border-red-500 py-1 px-2 rounded text-black' :
@@ -41,12 +41,6 @@ export default function SignUp() {
 					}
 					<div className="w-full flex justify-end gap-1">
 						<button
-							className='border-1 px-2 py-1 rounded'
-							onClick={() => router.push('/signUp')}
-						>
-              Criar conta
-						</button>
-						<button
 							className={`${name ?
 								'border-1 px-2 py-1 rounded' :
 								'border-1 px-2 py-1 rounded opacity-50'
@@ -57,6 +51,12 @@ export default function SignUp() {
               Entrar
 						</button>
 					</div>
+					<a
+						className='underline cursor-pointer mt-4'
+						onClick={() => router.push('/signUp')}
+					>
+            Criar uma conta
+					</a>
 				</div>
 			</main>
 		</>
