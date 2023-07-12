@@ -97,7 +97,7 @@ export default function Home() {
 					</div>
 				}
 
-				<ToastContainer limit={2}/>
+				<ToastContainer limit={2} draggablePercent={50}/>
 			</main>
 
 		</>
